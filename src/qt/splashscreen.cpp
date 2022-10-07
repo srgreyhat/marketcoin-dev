@@ -111,7 +111,6 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
         const int x = pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight;
         const int y = paddingTop+titleCopyrightVSpace;
         pixPaint.drawText(x,y,copyrightTextBitcoin);
-        pixPaint.drawText(x,y+10,copyrightTextBlackcoin);
         pixPaint.drawText(x,y+20,copyrightTextBlackmore);
         pixPaint.drawText(x,y+30,copyrightTextMarketcoin);
     }
