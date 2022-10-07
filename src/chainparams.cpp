@@ -94,33 +94,14 @@ public:
         nDefaultPort = 28797;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1665161450, 0, 0x1e0ffff0, 1, 0);
-        //consensus.hashGenesisBlock = genesis.GetHash();
+        genesis = CreateGenesisBlock(1665161450, 3202539, 0x1e0ffff0, 1, 0);
+        consensus.hashGenesisBlock = genesis.GetHash();
 
-        if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
-		std::cout << std::string("Calculating main genesis block...\n");
-            arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
-            uint256 hash;
-            genesis.nNonce = 0;
-            while (UintToArith256(genesis.GetHash()) > hashTarget)
-            {
-                ++genesis.nNonce;
-                if (genesis.nNonce == 0)
-                {
-                    ++genesis.nTime;
-                }
-            }
-            std::cout << "Genesis block found!\n";
-            std::cout << "nonce: " << genesis.nNonce << "\n";
-            std::cout << "time: " << genesis.nTime << "\n";
-            std::cout << "blockhash: " << genesis.GetHash().ToString().c_str() << "\n";
-            std::cout << "merklehash: " << genesis.hashMerkleRoot.ToString().c_str() << "\n";
-        }
-        assert(consensus.hashGenesisBlock == uint256S("0x00000515601d3a48a250b62584becbc12fa50fb12609dc81b0732e9a05804d72"));
-        assert(genesis.hashMerkleRoot == uint256S("0xb1aaa2e7d1bc5b982c83b94787057b2e7394062097e07944d55b51d23549a452"));
+	assert(consensus.hashGenesisBlock == uint256S("0x00000ed217f40ce8e53f0bd4613bf8320b05bcc4082f8347d72024e7826a8d99"));
+        assert(genesis.hashMerkleRoot == uint256S("0x2edcd8ab71dc8a40799bdaa316ad39941d59678ad9b996d8a37d3f0c67bb11bd"));
 
-	    vSeeds.push_back(CDNSSeedData("92.222.181.7", "92.222.181.7",true));
-	    vSeeds.push_back(CDNSSeedData("51.79.73.101", "51.79.73.101",true));
+	vSeeds.push_back(CDNSSeedData("92.222.181.7", "92.222.181.7",true));
+	vSeeds.push_back(CDNSSeedData("51.79.73.101", "51.79.73.101",true));
         vSeeds.push_back(CDNSSeedData("193.70.112.242", "193.70.112.242",true));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,51); // M
@@ -141,8 +122,8 @@ public:
         checkpointData = (CCheckpointData) {
             
                     boost::assign::map_list_of
-                    (0, uint256S("0x00000515601d3a48a250b62584becbc12fa50fb12609dc81b0732e9a05804d72")),
-                    1651806385, // * UNIX timestamp of last checkpoint block, Fri, 06 May 2022 03:06:25
+                    (0, uint256S("0x00000ed217f40ce8e53f0bd4613bf8320b05bcc4082f8347d72024e7826a8d99")),
+                    1665161450, // * UNIX timestamp of last checkpoint block, Fri, 06 May 2022 03:06:25
                     0,    // * total number of transactions between genesis and last checkpoint
                                 //   (the tx=... number in the SetBestChain debug.log lines)
                     0      // * estimated number of transactions per day after checkpoint
