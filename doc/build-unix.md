@@ -79,15 +79,27 @@ install necessary parts of boost:
 
         sudo apt-get install libboost-all-dev
 
+
 BerkeleyDB 6.2 is required for the wallet.
 
-Ubuntu and Debian have their own libdb-dev and libdb++-dev packages, but these will most likely install
-BerkeleyDB 5.1, which break binary wallet compatibility with the distributed executables which
-are based on BerkeleyDB 6.2. If you do not care about wallet compatibility,
-pass `--with-incompatible-bdb` to configure.
+	wget http://download.oracle.com/berkeley-db/db-6.2.23.tar.gz &&
+	tar xvfz db-6.2.23.tar.gz &&
+	cd db-6.2.23/build_unix                        &&
+	../dist/configure --prefix=/usr      \
+			  --enable-compat185 \
+			  --enable-dbm       \
+			  --disable-static   \
+			  --enable-cxx       &&
+	make
 
-See the section "Disable-wallet mode" to build Blackcoin More without wallet.
+Now as root user:
 
+	make docdir=/usr/share/doc/db-6.2.23 install &&
+	chown -v -R root:root                        \
+	      /usr/bin/db_*                          \
+	      /usr/include/db{,_185,_cxx}.h          \
+	      /usr/lib/libdb*.{so,la}                \
+	      /usr/share/doc/db-6.2.23
 Optional:
 
     sudo apt-get install libminiupnpc-dev (see --with-miniupnpc and --enable-upnp-default)
